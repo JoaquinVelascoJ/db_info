@@ -49,8 +49,8 @@ class DBTrainSensor(CoordinatorEntity, Entity):
             return {}
 
         return {
-            "Departure": journey.get("Departure"),
-            "Arrival": journey.get("Arrival"),
+            "Departure Station": journey.get("Departure Station"),
+            "Arrival Station": journey.get("Arrival Station"),
             "Departure Time": journey.get("Departure Time"),
             "Departure Time Real": journey.get("Departure Time Real"),
             "Arrival Time": journey.get("Arrival Time"),

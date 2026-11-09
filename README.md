@@ -73,7 +73,7 @@ The sensor state is the departure time of the connection (real-time if available
 
 | Attribute | Description |
 |---|---|
-| `Departure`, `Arrival` | Name of the first and last stop |
+| `Departure Station`, `Arrival Station` | Name of the first and last stop |
 | `Departure Time`, `Arrival Time` | Scheduled times |
 | `Departure Time Real`, `Arrival Time Real` | Real-time values, `null` if no real-time data is available |
 | `Duration` | Travel time, e.g. `1h 5min` |
@@ -123,7 +123,7 @@ entities:
 sort_by: sort_time
 columns:
   - name: Start
-    data: Departure
+    data: Departure Station
   - name: Verbindung
     data: Name
   - name: Abfahrt

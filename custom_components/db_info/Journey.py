@@ -62,13 +62,13 @@ class Journey:
             # negative timedelta, whose .seconds is close to 86400.
             if change_time.total_seconds() / 60 < 2:
                 self.problems[
-                    f"{train1.get_destination()} -> {train2.get_departure()}"
+                    f"{train1.get_destination_station()} -> {train2.get_departure_station()}"
                 ] = TrainProblem.CHANGE_NOT_ACCESSIBLE
 
-    def get_departure(self):
+    def get_departure_station(self):
         return self.trains[0].stops[0].name
 
-    def get_destination(self):
+    def get_destination_station(self):
         return self.trains[-1].stops[-1].name
 
     def get_number_of_train_changes(self):
@@ -104,7 +104,7 @@ class Journey:
         return arrival_time - departure_time
 
     def __str__(self):
-        return f"{self.get_departure()} -> {self.get_destination()}, Dauer: {self.get_duration()}, Train-Changes: {self.get_number_of_train_changes()}"
+        return f"{self.get_departure_station()} -> {self.get_destination_station()}, Dauer: {self.get_duration()}, Train-Changes: {self.get_number_of_train_changes()}"
 
     def to_json(self):
         problems = None
@@ -115,8 +115,8 @@ class Journey:
             trains.append(train.to_json())
         attributes = {
             "Name": self.name,
-            "Departure": self.get_departure(),
-            "Arrival": self.get_destination(),
+            "Departure Station": self.get_departure_station(),
+            "Arrival Station": self.get_destination_station(),
             "Transfers": self.get_number_of_train_changes(),
             "Duration": parse_duration(self.get_duration()),
             "Departure Time": format_time(self.get_departure_time()),
@@ -137,14 +137,14 @@ class Journey:
             if train.name == "Fußweg":
                 output += "       ║ Fußweg\n       ║\n"
                 continue
-            output += f"{parse_time(train.get_departure_time())}  ┬  {train.get_departure()}\n"
+            output += f"{parse_time(train.get_departure_time())}  ┬  {train.get_departure_station()}\n"
             output += (
                 f"{parse_time(train.get_departure_time_real())}  │  {train.name}\n"
             )
             output += f"       │  {train.get_number_of_stops()} Haltestellen\n"
             output += "       │\n"
             output += f"{parse_time(train.get_arrival_time())}  │\n"
-            output += f"{parse_time(train.get_arrival_time_real())}  ┴  {train.get_destination()}\n"
+            output += f"{parse_time(train.get_arrival_time_real())}  ┴  {train.get_destination_station()}\n"
             output += "       ║\n"
         return output[0:-9]
 

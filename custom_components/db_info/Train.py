@@ -50,12 +50,12 @@ class Train:
     def get_departure_time_real(self):
         return self.stops[0].departure_time_real
 
-    def get_departure(self):
+    def get_departure_station(self):
         if len(self.stops) == 0:
             return "Fußweg"
         return self.stops[0].name
 
-    def get_destination(self):
+    def get_destination_station(self):
         if len(self.stops) == 0:
             return "Fußweg"
         return self.stops[-1].name
@@ -89,11 +89,11 @@ class Train:
         else:
             attributes = {
                 "Name": self.name,
-                "Departure": self.get_departure(),
+                "Departure Station": self.get_departure_station(),
                 "Departure Time": format_time(self.get_departure_time()),
                 "Departure Time Real": format_time(self.get_departure_time_real()),
                 "Departure Platform": self.get_departure_platform(),
-                "Arrival": self.get_destination(),
+                "Arrival Station": self.get_destination_station(),
                 "Arrival Time": format_time(self.get_arrival_time()),
                 "Arrival Time Real": format_time(self.get_arrival_time_real()),
                 "Arrival Platform": self.get_arrival_platform(),
@@ -120,7 +120,7 @@ def parse_train(json_data):
         # transfer leg (typ "FUSSWEG"/"TRANSFER"), which legitimately
         # carries none of the above. The rest of this codebase already
         # expects such legs to surface as a Train named "Fußweg" (see
-        # Journey.parse_trip and Train.get_departure/get_destination).
+        # Journey.parse_trip and Train.get_departure_station/get_destination_station).
         name = "Fußweg"
         destination = None
     else:
